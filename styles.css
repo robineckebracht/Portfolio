@@ -383,10 +383,7 @@ img {
 	}
 }
 
-/* ===== GitHub Projects Embed ===== */
-
 #github-projects {
-	/* nutzt dein bestehendes .grid Layout, aber falls #github-projects alleine verwendet wird: */
 	display: grid;
 	gap: 18px;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -404,27 +401,27 @@ img {
 	}
 }
 
-/* Karteninhalt für GitHub repos */
 #github-projects .card {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 }
 
-/* Repo-Name */
 #github-projects .card h3 {
 	margin: 0;
 	line-height: 1.15;
 }
 
-/* Repo-Description */
 #github-projects .card p {
 	margin: 0;
 	opacity: 0.9;
 	line-height: 1.6;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
-/* Pills-Zeile (Language + Stars) */
 #github-projects .pill-row {
 	display: flex;
 	flex-wrap: wrap;
@@ -432,7 +429,6 @@ img {
 	margin-top: 2px;
 }
 
-/* Wenn dein .pill schon existiert, wird das überschrieben/ergänzt */
 #github-projects .pill {
 	display: inline-flex;
 	align-items: center;
@@ -445,14 +441,12 @@ img {
 	white-space: nowrap;
 }
 
-/* GitHub-Link Button unterhalb */
 #github-projects .card a.button {
-	margin-top: auto; /* schiebt den Button nach unten -> gleich hohe Cards */
+	margin-top: auto;
 	width: fit-content;
 	text-decoration: none;
 }
 
-/* Falls dein .button.ghost existiert: nur leichte Verbesserung */
 #github-projects .button.ghost {
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	background: rgba(255, 255, 255, 0.04);
@@ -462,15 +456,6 @@ img {
 	background: rgba(255, 255, 255, 0.08);
 }
 
-/* Optional: Wenn repo descriptions sehr lang sind -> clamp */
-#github-projects .card p {
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-/* ===== Contact Section ===== */
 
 #contact .card {
 	position: relative;

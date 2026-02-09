@@ -1,11 +1,13 @@
 const revealItems = document.querySelectorAll(".reveal");
 const navLinks = document.querySelectorAll(".nav-links a");
+const isActivationKey = (event) => event.key === "Enter" || event.key === " ";
 
 const observer = new IntersectionObserver(
-	(entries) => {
+	(entries, currentObserver) => {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
 				entry.target.classList.add("visible");
+				currentObserver.unobserve(entry.target);
 			}
 		});
 	},
@@ -64,7 +66,7 @@ if (focusToggle) {
 
 		focusToggle.addEventListener("click", toggleFocusText);
 		focusToggle.addEventListener("keydown", (event) => {
-			if (event.key === "Enter" || event.key === " ") {
+			if (isActivationKey(event)) {
 				event.preventDefault();
 				toggleFocusText();
 			}
@@ -93,7 +95,7 @@ if (aboutCards.length > 0) {
 	aboutCards.forEach((card) => {
 		card.addEventListener("click", () => toggleLock(card));
 		card.addEventListener("keydown", (event) => {
-			if (event.key === "Enter" || event.key === " ") {
+			if (isActivationKey(event)) {
 				event.preventDefault();
 				toggleLock(card);
 			}
@@ -136,7 +138,11 @@ if (emailCopyButton) {
 			return;
 		}
 		try {
-			await navigator.clipboard.writeText(email);
+			if (navigator.clipboard && navigator.clipboard.writeText) {
+				await navigator.clipboard.writeText(email);
+			} else {
+				fallbackCopy(email);
+			}
 			showCopied();
 		} catch (error) {
 			fallbackCopy(email);
@@ -221,28 +227,38 @@ if (logoTrigger) {
 const username = "robineckebracht";
 const projectsContainer = document.getElementById("github-projects");
 
-fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-	.then(response => response.json())
-	.then(repos => {
-		repos
-			.filter(repo => !repo.fork)
-			.slice(0, 3)
-			.forEach(repo => {
-				const card = document.createElement("article");
-				card.className = "card";
+if (projectsContainer) {
+	fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error("Failed to load projects");
+			}
+			return response.json();
+		})
+		.then((repos) => {
+			repos
+				.filter((repo) => !repo.fork)
+				.slice(0, 3)
+				.forEach((repo) => {
+					const card = document.createElement("article");
+					card.className = "card";
 
-				card.innerHTML = `
-					<h3>${repo.name}</h3>
-					<p>${repo.description || "No description provided."}</p>
-					<div class="pill-row">
-						<span class="pill">${repo.language || "Code"}</span>
-						<span class="pill">★ ${repo.stargazers_count}</span>
-					</div>
-					<a href="${repo.html_url}" target="_blank" class="button ghost">
-						View on GitHub
-					</a>
-				`;
+					card.innerHTML = `
+						<h3>${repo.name}</h3>
+						<p>${repo.description || "No description provided."}</p>
+						<div class="pill-row">
+							<span class="pill">${repo.language || "Code"}</span>
+							<span class="pill">★ ${repo.stargazers_count}</span>
+						</div>
+						<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="button ghost">
+							View on GitHub
+						</a>
+					`;
 
-				projectsContainer.appendChild(card);
-			});
-	});
+					projectsContainer.appendChild(card);
+				});
+		})
+		.catch(() => {
+			projectsContainer.innerHTML = "<p>Unable to load projects right now.</p>";
+		});
+}
