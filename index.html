@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Portfolio</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="page">
+			<div class="shape" aria-hidden="true"></div>
+
+			<nav class="nav">
+				<div class="nav-inner">
+					<div class="logo" id="logo-trigger">Robin Eckebracht</div>
+					<div class="nav-links">
+						<a href="#about">About</a>
+						<a href="#projects">Projects</a>
+						<a href="#skills">Skills</a>
+						<a href="#contact">Contact</a>
+					</div>
+				</div>
+			</nav>
+
+			<header class="hero" id="top">
+				<div>
+					<div class="badge">TU Dortmund University</div>
+					<h1 class="hero-title">Computer Science Student</h1>
+					<p>
+						I am interested in software development, artificial intelligence,
+						and databases, and enjoy turning theoretical concepts into code.
+					</p>
+					<div class="cta-row">
+					<!--	<a class="button primary" href="#projects">View projects</a> -->
+						<a class="button ghost" href="#contact">Get in touch</a>
+					</div>
+				</div>
+
+				<div class="hero-card focus-toggle" role="button" tabindex="0">
+					<h3>Current focus</h3>
+					<p
+						class="focus-text"
+						data-alt="Currently seeking a working student position to apply my academic knowledge in practice, gain real-world experience, and continuously improve my technical skills."
+					>
+						My main focus is my computer science studies and building a solid
+						theoretical foundation. I complement this by writing code to
+						reinforce concepts and improve my programming skills.
+					</p>
+				</div>
+			</header>
+
+			<section class="section reveal" id="projects">
+				<h2 class="section-title">Projects</h2>
+				<p class="section-subtitle">
+					A selection of public GitHub repositories showcasing my current work
+					and learning progress.
+				</p>
+				<div class="grid" id="github-projects"></div>
+			</section>
+
+			<section class="section reveal" id="about">
+				<h2 class="section-title">About me</h2>
+				<p class="section-subtitle">
+					A short overview of who I am, how I work, and what I aim for.
+				</p>
+
+				<div class="grid">
+					<div class="card about-card" role="button" tabindex="0" aria-expanded="false">
+						<h3>Background</h3>
+						<p class="about-text">
+							I am a computer science student at TU Dortmund University with a
+							strong interest in software development, artificial intelligence,
+							and databases. My academic focus is on building a solid
+							theoretical foundation and applying it through practical
+							programming.
+						</p>
+					</div>
+
+					<div class="card about-card" role="button" tabindex="0" aria-expanded="false">
+						<h3>Motivation and Goal</h3>
+						<p class="about-text">
+							I am motivated by transforming abstract concepts into working
+							software. My goal is to gain practical experience alongside my
+							studies and develop the skills required to become a software
+							engineer in a professional environment.
+						</p>
+					</div>
+
+					<div class="card about-card" role="button" tabindex="0" aria-expanded="false">
+						<h3>Working ethics</h3>
+						<p class="about-text">
+							I value a systematic approach to problem solving. I enjoy learning
+							new technologies, working independently, and continuously
+							improving my skills through practice and reflection.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section reveal" id="skills">
+				<h2 class="section-title">Skills</h2>
+				<p class="section-subtitle">
+					A quick overview of my current focus areas and tools.
+				</p>
+
+				<div class="grid">
+					<div class="card">
+						<h3>Comfortable with</h3>
+						<div class="pill-row">
+							<span class="pill">Java</span>
+							<span class="pill">C</span>
+							<span class="pill">C#</span>
+							<span class="pill">SQL</span>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3>Learning</h3>
+						<div class="pill-row">
+							<span class="pill">VHDL</span>
+							<span class="pill">Formal Logic</span>
+							<span class="pill">Probability & Statistics</span>
+						</div>
+					</div>
+
+					<div class="card">
+						<h3>Familiar Topics</h3>
+						<div class="pill-row">
+							<span class="pill">Data Structures & Algorithms</span>
+                            <span class="pill">OOP</span>
+                            <span class="pill">OS (Basics)</span>
+                            <span class="pill">Computer Architecture (Basics)</span>
+                            <span class="pill">Networks</span>
+                            <span class="pill">Databases (SQL)</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="section reveal" id="timeline">
+				<h2 class="section-title">Timeline</h2>
+				<p class="section-subtitle">
+					Small milestones that show what I am focusing on each semester.
+				</p>
+
+				<div class="timeline">
+					<div class="timeline-item">
+						<small>2025/26 · Winter</small>
+						<strong>Logic, Digital Systems & Statistics</strong>
+						<span>
+							Logical reasoning, digital hardware fundamentals with VHDL, and
+							basic statistical methods.
+						</span>
+					</div>
+
+					<div class="timeline-item">
+						<small>2025 · Summer</small>
+						<strong>Calculus, Logistics & SQL</strong>
+						<span>
+							Calculus fundamentals, supply chain management concepts,
+							automation basics, and relational databases with SQL.
+						</span>
+					</div>
+
+					<div class="timeline-item">
+						<small>2023-2025 · Early Semesters</small>
+						<strong>CS fundamentals & programming</strong>
+						<span>
+							Data structures, algorithms, object-oriented programming, linear algebra,
+                            computer architecture, operating systems, and computer networks.
+						</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="section reveal" id="contact">
+				<h2 class="section-title">Contact</h2>
+				<p class="section-subtitle"></p>
+
+				<div class="card">
+					<div class="cta-row">
+						<a class="button primary" href="https://github.com/robineckebracht">
+							GitHub
+						</a>
+						<a class="button ghost" href="https://www.linkedin.com/in/robineckebracht">
+							LinkedIn
+						</a>
+					</div>
+					<p class="contact-label">Email</p>
+					<button
+						class="email-copy"
+						type="button"
+						data-email="robin.eckebracht@gmx.de"
+					>
+						<span class="email-text">robin.eckebracht@gmx.de</span>
+						<span class="email-hint" aria-live="polite">Copy</span>
+					</button>
+				</div>
+			</section>
+
+			<footer class="footer">Built with HTML, CSS, and JavaScript (AI-assisted development).</footer>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>

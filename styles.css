@@ -1,0 +1,578 @@
+:root {
+	--bg: #f8f4ef;
+	--ink: #1f1b18;
+	--muted: #6b5f57;
+	--accent: #ff6b35;
+	--accent-2: #2ec4b6;
+	--card: #ffffff;
+	--stroke: #e5ded7;
+	--shadow: 0 18px 40px rgba(31, 27, 24, 0.12);
+	--radius: 18px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+	color: var(--ink);
+	background: radial-gradient(1200px 800px at 10% -10%, #ffd9c8, transparent 60%),
+		radial-gradient(900px 700px at 110% 10%, #c7f3ee, transparent 55%), var(--bg);
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.page {
+	position: relative;
+	overflow: hidden;
+	padding-top: 72px;
+}
+
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 10;
+	backdrop-filter: blur(10px);
+	background: rgba(248, 244, 239, 0.75);
+	border-bottom: 1px solid var(--stroke);
+}
+
+.nav-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 24px;
+}
+
+.logo {
+	font-family: "DM Serif Display", serif;
+	font-size: 22px;
+	letter-spacing: 0.5px;
+}
+
+#logo-trigger {
+	cursor: pointer;
+}
+
+.bit-burst {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 999;
+}
+
+.bit {
+	position: absolute;
+	font-weight: 700;
+	font-size: 18px;
+	color: #111;
+	text-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+	will-change: transform, opacity;
+}
+
+.nav-links {
+	display: flex;
+	gap: 18px;
+	font-weight: 500;
+	color: var(--muted);
+}
+
+.nav-links a.active {
+	color: var(--ink);
+}
+
+.hero {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 80px 24px 30px;
+	display: grid;
+	gap: 32px;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	align-items: center;
+}
+
+.hero h1 {
+	font-family: "DM Serif Display", serif;
+	font-size: clamp(36px, 6vw, 64px);
+	margin: 0 0 16px;
+}
+
+.hero p {
+	font-size: 18px;
+	color: var(--muted);
+	margin: 0 0 24px;
+	line-height: 1.6;
+}
+
+.cta-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.button {
+	padding: 12px 20px;
+	border-radius: 999px;
+	font-weight: 600;
+	border: 1px solid transparent;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.button.primary {
+	background: var(--ink);
+	color: #fff;
+	box-shadow: var(--shadow);
+}
+
+.button.ghost {
+	border-color: var(--ink);
+}
+
+.button:hover {
+	transform: translateY(-2px);
+}
+
+.hero-card {
+	background: var(--card);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow);
+	padding: 24px;
+	border: 1px solid var(--stroke);
+}
+
+.focus-toggle {
+	cursor: pointer;
+	animation: focus-nudge 5s ease-in-out infinite;
+}
+
+.focus-toggle:focus-visible {
+	outline: 3px solid rgba(46, 196, 182, 0.5);
+	outline-offset: 2px;
+}
+
+.focus-text {
+	display: block;
+	transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.focus-text.slide-out {
+	opacity: 0;
+	transform: translateX(-16px);
+}
+
+.focus-text.slide-in {
+	opacity: 0;
+	transform: translateX(16px);
+}
+
+@keyframes focus-nudge {
+	0%,
+	88%,
+	100% {
+		transform: translateX(0);
+	}
+	92% {
+		transform: translateX(-3px);
+	}
+	96% {
+		transform: translateX(3px);
+	}
+}
+
+.badge {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: #fff3ed;
+	color: #8a3a1d;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+
+.section {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 70px 24px;
+}
+
+.section-title {
+	font-size: 32px;
+	margin: 0 0 12px;
+}
+
+.section-subtitle {
+	color: var(--muted);
+	margin: 0 0 32px;
+	max-width: 620px;
+}
+
+.grid {
+	display: grid;
+	gap: 18px;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+#about .grid {
+	align-items: start;
+}
+
+.card {
+	background: var(--card);
+	border-radius: var(--radius);
+	padding: 22px;
+	border: 1px solid var(--stroke);
+	box-shadow: 0 12px 30px rgba(31, 27, 24, 0.08);
+}
+
+.card h3 {
+	margin: 0 0 8px;
+}
+
+.about-card {
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 34px rgba(31, 27, 24, 0.12);
+}
+
+.about-card:focus-visible {
+	outline: 3px solid rgba(46, 196, 182, 0.5);
+	outline-offset: 3px;
+}
+
+.about-text {
+	margin: 0;
+	color: var(--muted);
+	line-height: 1.5;
+	max-height: 3.6em;
+	overflow: hidden;
+	transition: max-height 0.3s ease;
+}
+
+.about-card:hover .about-text,
+.about-card.is-locked .about-text {
+	max-height: 12em;
+}
+
+.card p {
+	margin: 0 0 12px;
+	color: var(--muted);
+	line-height: 1.5;
+}
+
+.pill-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.pill {
+	padding: 6px 10px;
+	border-radius: 999px;
+	background: #f2ece6;
+	font-size: 13px;
+	font-weight: 600;
+	color: #5d4f47;
+}
+
+.timeline {
+	display: grid;
+	gap: 14px;
+}
+
+.timeline-item {
+	display: grid;
+	gap: 6px;
+	padding: 16px 18px;
+	border-left: 4px solid var(--accent-2);
+	background: #f6fbfa;
+	border-radius: 12px;
+}
+
+.timeline-item small {
+	color: var(--muted);
+	font-weight: 600;
+}
+
+.footer {
+	padding: 32px 24px 60px;
+	text-align: center;
+	color: var(--muted);
+}
+
+.shape {
+	position: absolute;
+	width: 260px;
+	height: 260px;
+	border-radius: 40px;
+	background: linear-gradient(135deg, #ffe5d9, #d0f4f1);
+	top: 120px;
+	right: -80px;
+	transform: rotate(18deg);
+	opacity: 0.7;
+	z-index: 0;
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(18px) scale(0.98);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		transform: none;
+		transition: none;
+	}
+
+	.focus-toggle {
+		animation: none;
+	}
+
+	.focus-text {
+		transition: none;
+	}
+}
+
+@media (max-width: 720px) {
+	.nav-links {
+		display: none;
+	}
+
+	.hero {
+		padding-top: 50px;
+	}
+}
+
+/* ===== GitHub Projects Embed ===== */
+
+#github-projects {
+	/* nutzt dein bestehendes .grid Layout, aber falls #github-projects alleine verwendet wird: */
+	display: grid;
+	gap: 18px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+	#github-projects {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	#github-projects {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Karteninhalt für GitHub repos */
+#github-projects .card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* Repo-Name */
+#github-projects .card h3 {
+	margin: 0;
+	line-height: 1.15;
+}
+
+/* Repo-Description */
+#github-projects .card p {
+	margin: 0;
+	opacity: 0.9;
+	line-height: 1.6;
+}
+
+/* Pills-Zeile (Language + Stars) */
+#github-projects .pill-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 2px;
+}
+
+/* Wenn dein .pill schon existiert, wird das überschrieben/ergänzt */
+#github-projects .pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: rgba(255, 255, 255, 0.06);
+	font-size: 0.9rem;
+	white-space: nowrap;
+}
+
+/* GitHub-Link Button unterhalb */
+#github-projects .card a.button {
+	margin-top: auto; /* schiebt den Button nach unten -> gleich hohe Cards */
+	width: fit-content;
+	text-decoration: none;
+}
+
+/* Falls dein .button.ghost existiert: nur leichte Verbesserung */
+#github-projects .button.ghost {
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: rgba(255, 255, 255, 0.04);
+}
+
+#github-projects .button.ghost:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+/* Optional: Wenn repo descriptions sehr lang sind -> clamp */
+#github-projects .card p {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* ===== Contact Section ===== */
+
+#contact .card {
+	position: relative;
+	background: linear-gradient(135deg, #ffffff, #fff7f3);
+	border: 1px solid rgba(255, 107, 53, 0.18);
+	box-shadow: 0 16px 32px rgba(31, 27, 24, 0.12);
+	max-width: 560px;
+	width: 100%;
+	gap: 14px;
+	display: grid;
+}
+
+#contact .card::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: var(--radius);
+	background: linear-gradient(135deg, rgba(255, 107, 53, 0.12), rgba(46, 196, 182, 0.12));
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+#contact .card > * {
+	position: relative;
+	z-index: 1;
+}
+
+#contact .cta-row {
+	justify-content: flex-start;
+	margin-bottom: 14px;
+}
+
+#contact .button {
+	background: #fff;
+	border: 1px solid rgba(31, 27, 24, 0.12);
+	box-shadow: 0 12px 24px rgba(31, 27, 24, 0.12);
+}
+
+#contact .button.primary {
+	background: var(--ink);
+	color: #fff;
+}
+
+#contact .button.ghost {
+	background: rgba(255, 255, 255, 0.8);
+	color: var(--ink);
+}
+
+#contact .button:hover {
+	transform: translateY(-2px) scale(1.01);
+}
+
+#contact .card p {
+	margin: 0;
+	font-weight: 600;
+	color: var(--ink);
+}
+
+#contact .contact-label {
+	margin-top: 4px;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--muted);
+}
+
+#contact .email-copy {
+	display: inline-flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	width: 100%;
+	padding: 12px 16px;
+	border-radius: 14px;
+	border: 1px solid rgba(31, 27, 24, 0.18);
+	background: rgba(255, 255, 255, 0.9);
+	font: inherit;
+	font-weight: 600;
+	color: var(--ink);
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#contact .email-copy:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 20px rgba(31, 27, 24, 0.12);
+}
+
+#contact .email-copy:focus-visible {
+	outline: 3px solid rgba(46, 196, 182, 0.5);
+	outline-offset: 2px;
+}
+
+#contact .email-text {
+	word-break: break-all;
+}
+
+#contact .email-hint {
+	font-size: 13px;
+	color: var(--muted);
+	background: rgba(31, 27, 24, 0.08);
+	padding: 4px 10px;
+	border-radius: 999px;
+}
+
+#contact .email-copy.copied .email-hint {
+	background: rgba(46, 196, 182, 0.2);
+	color: #0b5f58;
+}
+
