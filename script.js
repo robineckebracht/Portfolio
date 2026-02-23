@@ -228,6 +228,110 @@ const username = "robineckebracht";
 const projectsContainer = document.getElementById("github-projects");
 
 if (projectsContainer) {
+	const createProjectCard = (repo) => {
+		const card = document.createElement("article");
+		card.className = "card project-slide";
+
+		card.innerHTML = `
+			<h3>${repo.name}</h3>
+			<p>${repo.description || "No description provided."}</p>
+			<div class="pill-row">
+				<span class="pill">${repo.language || "Code"}</span>
+				<span class="pill">★ ${repo.stargazers_count}</span>
+			</div>
+			<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="button ghost">
+				View on GitHub
+			</a>
+		`;
+
+		return card;
+	};
+
+	const renderProjectsCarousel = (repos) => {
+		if (repos.length === 0) {
+			projectsContainer.innerHTML = "<p>No public projects found right now.</p>";
+			return;
+		}
+
+		projectsContainer.innerHTML = "";
+		projectsContainer.classList.add("project-carousel");
+
+		const previousButton = document.createElement("button");
+		previousButton.type = "button";
+		previousButton.className = "project-nav project-nav-prev";
+		previousButton.setAttribute("aria-label", "Previous project");
+		previousButton.textContent = "←";
+
+		const nextButton = document.createElement("button");
+		nextButton.type = "button";
+		nextButton.className = "project-nav project-nav-next";
+		nextButton.setAttribute("aria-label", "Next project");
+		nextButton.textContent = "→";
+
+		const viewport = document.createElement("div");
+		viewport.className = "project-viewport";
+		viewport.tabIndex = 0;
+		viewport.setAttribute("aria-label", "Project showcase carousel");
+
+		const track = document.createElement("div");
+		track.className = "project-track";
+
+		repos.forEach((repo) => {
+			track.appendChild(createProjectCard(repo));
+		});
+
+		viewport.appendChild(track);
+		projectsContainer.append(previousButton, viewport, nextButton);
+
+		let currentIndex = 0;
+		const visibleCards = 2;
+		const maxIndex = Math.max(0, repos.length - visibleCards);
+
+		const updateCarousel = () => {
+			const firstSlide = track.querySelector(".project-slide");
+			const gapValue = window.getComputedStyle(track).columnGap || "0";
+			const parsedGap = Number.parseFloat(gapValue);
+			const gap = Number.isNaN(parsedGap) ? 0 : parsedGap;
+			const slideWidth = firstSlide ? firstSlide.getBoundingClientRect().width : 0;
+			const offset = currentIndex * (slideWidth + gap);
+			track.style.transform = `translateX(-${offset}px)`;
+			previousButton.disabled = currentIndex === 0;
+			nextButton.disabled = currentIndex === maxIndex;
+		};
+
+		const goPrevious = () => {
+			if (currentIndex > 0) {
+				currentIndex -= 1;
+				updateCarousel();
+			}
+		};
+
+		const goNext = () => {
+			if (currentIndex < maxIndex) {
+				currentIndex += 1;
+				updateCarousel();
+			}
+		};
+
+		previousButton.addEventListener("click", goPrevious);
+		nextButton.addEventListener("click", goNext);
+
+		viewport.addEventListener("keydown", (event) => {
+			if (event.key === "ArrowLeft") {
+				event.preventDefault();
+				goPrevious();
+			}
+			if (event.key === "ArrowRight") {
+				event.preventDefault();
+				goNext();
+			}
+		});
+
+		window.addEventListener("resize", updateCarousel);
+
+		updateCarousel();
+	};
+
 	fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
 		.then((response) => {
 			if (!response.ok) {
@@ -236,27 +340,8 @@ if (projectsContainer) {
 			return response.json();
 		})
 		.then((repos) => {
-			repos
-				.filter((repo) => !repo.fork)
-				.slice(0, 3)
-				.forEach((repo) => {
-					const card = document.createElement("article");
-					card.className = "card";
-
-					card.innerHTML = `
-						<h3>${repo.name}</h3>
-						<p>${repo.description || "No description provided."}</p>
-						<div class="pill-row">
-							<span class="pill">${repo.language || "Code"}</span>
-							<span class="pill">★ ${repo.stargazers_count}</span>
-						</div>
-						<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="button ghost">
-							View on GitHub
-						</a>
-					`;
-
-					projectsContainer.appendChild(card);
-				});
+			const projectRepos = repos.filter((repo) => !repo.fork).slice(0, 10);
+			renderProjectsCarousel(projectRepos);
 		})
 		.catch(() => {
 			projectsContainer.innerHTML = "<p>Unable to load projects right now.</p>";
